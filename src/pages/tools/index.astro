@@ -1,0 +1,41 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { SERVICE_NAME } from "../../lib/warikan/branding";
+
+const tools = [
+  {
+    href: "/tools/warikan/",
+    name: SERVICE_NAME,
+    description: "学年・役職・運転手など、人によって支払額を変えたい割り勘を一瞬で計算。",
+  },
+];
+---
+
+<Layout
+  title="便利ツール一覧｜副業ツールズ"
+  description={`ログイン不要・無料で使える便利Webツールの一覧です。${SERVICE_NAME}など、日常のちょっとした計算や手間を解決するツールを公開しています。`}
+  path="/tools/"
+>
+  <header class="border-b border-slate-200 bg-white">
+    <div class="mx-auto max-w-md px-4 py-3 sm:max-w-lg">
+      <a href="/" class="text-xs font-semibold text-slate-400">副業ツールズ</a>
+      <h1 class="mt-0.5 text-lg font-bold text-slate-900">ツール一覧</h1>
+    </div>
+  </header>
+
+  <main class="mx-auto max-w-md px-4 py-6 sm:max-w-lg">
+    <ul class="space-y-3">
+      {tools.map((t) => (
+        <li>
+          <a
+            href={t.href}
+            class="block rounded-2xl border border-slate-200 bg-white p-4 shadow-sm active:bg-slate-50"
+          >
+            <h2 class="text-sm font-bold text-slate-800">{t.name}</h2>
+            <p class="mt-1 text-xs leading-relaxed text-slate-500">{t.description}</p>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </main>
+</Layout>

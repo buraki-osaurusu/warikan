@@ -1,0 +1,12 @@
+@import "tailwindcss";
+
+/*
+ * iOS Safariのタップ時グレーフラッシュを消す。
+ * active:クラスによる独自の押下フィードバックだけが見えるようにするため
+ * （二重の視覚フィードバックによる「反応が遅い/変」という体感を防ぐ）。
+ */
+button,
+a,
+[role="button"] {
+  -webkit-tap-highlight-color: transparent;
+}
