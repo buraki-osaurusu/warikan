@@ -1,10 +1,11 @@
 ---
 import '../styles/global.css';
+import { SERVICE_NAME } from '../lib/warikan/branding';
 
 interface Props {
   title: string;
   description: string;
-  /** パス末尾は "/" で終える（例: "/tools/warikan/"） */
+  /** パス末尾は "/" で終える（例: "/tools/warikan/"）。canonical URLの生成にのみ使う */
   path?: string;
   noindex?: boolean;
 }
@@ -12,7 +13,7 @@ interface Props {
 const { title, description, path = '/', noindex = false } = Astro.props;
 
 const canonicalURL = new URL(path, Astro.site);
-const siteName = '副業ツールズ';
+const siteName = SERVICE_NAME;
 ---
 
 <html lang="ja">
@@ -26,7 +27,7 @@ const siteName = '副業ツールズ';
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonicalURL} />
-    {noindex && <meta name="robots" content="noindex,nofollow" />}
+    {noindex && <meta name="robots" content="noindex,follow" />}
 
     <meta name="theme-color" content="#0f766e" />
 

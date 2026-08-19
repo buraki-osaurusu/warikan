@@ -1,26 +1,30 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import { SERVICE_NAME } from "../lib/warikan/branding";
+
+// 本番（Cloudflare Pages）ではpublic/_redirectsによりエッジで301リダイレクトされ、
+// このページの内容が実際に配信されることはない。
+// ローカルのdev/previewなど_redirectsが効かない環境向けのフォールバックとして、
+// JSによる即時リダイレクト＋noscript時のmeta refreshを用意している。
+const destination = "/tools/warikan/";
 ---
 
 <Layout
-  title="副業ツールズ｜スマホでサッと使える無料の計算ツール集"
-  description="割り勘計算をはじめ、日常のちょっとした計算や手間を解決する無料Webツールを公開しています。ログイン不要・アプリ不要、スマートフォンからすぐに使えます。"
-  path="/"
+  title={SERVICE_NAME}
+  description={`${SERVICE_NAME}のページへ移動します。`}
+  path="/tools/warikan/"
+  noindex={true}
 >
-  <main class="mx-auto flex min-h-screen max-w-md flex-col items-center justify-center px-4 py-10 text-center sm:max-w-lg">
-    <h1 class="text-2xl font-bold text-slate-900">副業ツールズ</h1>
-    <p class="mt-3 text-sm leading-relaxed text-slate-600">
-      日常のちょっとした計算や手間を、スマホでサッと解決する無料Webツール集です。
+  <script define:vars={{ destination }} is:inline>
+    window.location.replace(destination);
+  </script>
+  <noscript>
+    <meta http-equiv="refresh" content={`0;url=${destination}`} />
+  </noscript>
+  <main class="flex min-h-screen items-center justify-center px-4 text-center">
+    <p class="text-sm text-slate-500">
+      <a href={destination} class="font-semibold text-teal-700 underline">{SERVICE_NAME}</a>
+      へ移動しています…
     </p>
-    <a
-      href="/tools/warikan/"
-      class="mt-8 w-full rounded-2xl bg-teal-600 px-6 py-4 text-base font-bold text-white shadow-sm active:bg-teal-700"
-    >
-      {SERVICE_NAME}を使う
-    </a>
-    <a href="/tools/" class="mt-4 text-sm font-semibold text-slate-500">
-      ツール一覧を見る →
-    </a>
   </main>
 </Layout>
